@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class Azienda {
@@ -49,7 +50,6 @@ public class Azienda {
     }
 
     // Assegnazione dei progetti e stampa della mappa nel caso 1 a N:
-
     public void assegnaUtenteAProgetto(Progetto progetto, Utente utente) {
         if (!mappaProgetti.containsKey(progetto)) {
             Set<Utente> listaUtenti = new HashSet<>();
@@ -63,10 +63,20 @@ public class Azienda {
                 + " è stato assegnato al progetto " + progetto.getNomeProgetto());
     }
 
+    // Ritorna la lista di utenti assegnati ad un certo progetto:
+    public Set<Utente> getUtentiPerProgetto(Progetto progetto) {
+        return mappaProgetti.get(progetto);
+    }
+
+    // Ritorna il numero di utenti assegnati ad un particolare progetto:
+    public Integer getNumeroUtentiPerProgetto(Progetto progetto) {
+        return getUtentiPerProgetto(progetto).size();
+    }
+
     public void stampaMappaProgetti() {
         for (Progetto progetto : mappaProgetti.keySet()) {
             progetto.stampaProgetto();
-            Set<Utente> listaUtenti = mappaProgetti.get(progetto);
+            Set<Utente> listaUtenti = getUtentiPerProgetto(progetto);
             for (Utente utente : listaUtenti) {
                 utente.stampaUtente();
             }
@@ -75,7 +85,6 @@ public class Azienda {
 
     // Metodo per stampare tutte le info di un progetto dato l'id del progetto
     // e tutti gli utenti che stanno lavorando al progetto:
-
     public void stampaInfoProgettiEUtenti(Integer IDProgetto) {
         Integer counter = 0;
 

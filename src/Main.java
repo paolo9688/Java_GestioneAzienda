@@ -53,5 +53,7 @@ public class Main {
         System.out.println();
 
         azienda.stampaInfoProgettiEUtenti(2);
+
+        System.out.println(azienda.getNumeroUtentiPerProgetto(progetto1));
     }
 }

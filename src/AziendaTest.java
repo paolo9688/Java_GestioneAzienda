@@ -1,10 +1,12 @@
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 class AziendaTest {
 
@@ -16,8 +18,8 @@ class AziendaTest {
     private Utente utente2;
     private Utente utente3;
 
-    @Before
-    public void setUpAzienda() {
+    @BeforeEach
+    void setUp() {
         azienda = new Azienda();
 
         LocalDate dataSpecifica1 = LocalDate.of(2021, 10, 27);
@@ -35,43 +37,43 @@ class AziendaTest {
         utente1 = new Utente("Mario", "Rossi", 1);
         utente2 = new Utente("Gianni", "Agnelli", 2);
         utente3 = new Utente("Marco", "Verdi", 3);
+
+        azienda.assegnaUtenteAProgetto(progetto1, utente1);
+        azienda.assegnaUtenteAProgetto(progetto2, utente1);
+        azienda.assegnaUtenteAProgetto(progetto3, utente3);
     }
 
     @Test
     void aggiungiProgettoTest() {
-        azienda.aggiungiProgetto(progetto1);
-        azienda.aggiungiProgetto(progetto2);
-        assertEquals(2, azienda.getNumeroProgetti());
-        assertEquals(2, azienda.getProgetti().size());
+        Integer actual = 3;
+        Integer expected = azienda.getProgetti().size();
+        assertEquals(actual, expected);
+        assertTrue(azienda.getProgetti().contains(progetto1));
+        assertTrue(azienda.getProgetti().contains(progetto2));
+        assertTrue(azienda.getProgetti().contains(progetto3));
+    }
+
+    @Test
+    void rimuoviProgettoTest() {
+        azienda.rimuoviProgetto(progetto3);
+        Integer actual = 2;
+        Integer expected = azienda.getProgetti().size();
+        assertEquals(actual, expected);
         assertTrue(azienda.getProgetti().contains(progetto1));
         assertTrue(azienda.getProgetti().contains(progetto2));
     }
 
     @Test
-    void rimuoviProgetto() {
+    void calcoloBudgetTest() {
+        Double actual = 7000.0;
+        Double expected = progetto1.getBudgetProgetto() + progetto2.getBudgetProgetto() + progetto3.getBudgetProgetto();
+        assertEquals(actual, expected);
     }
 
     @Test
-    void stampaProgetti() {
-    }
-
-    @Test
-    void calcoloBudget() {
-    }
-
-    @Test
-    void gestioneScadenze() {
-    }
-
-    @Test
-    void assegnaUtenteAProgetto() {
-    }
-
-    @Test
-    void stampaMappaProgetti() {
-    }
-
-    @Test
-    void stampaInfoProgettiEUtenti() {
+    void assegnaUtenteAProgettoTest() {
+        Integer actual = 1;
+        Integer expected = azienda.getNumeroUtentiPerProgetto(progetto1);
+        assertEquals(actual, expected);
     }
 }

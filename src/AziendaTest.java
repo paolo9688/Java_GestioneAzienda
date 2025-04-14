@@ -13,7 +13,6 @@ class AziendaTest {
     private Progetto progetto2;
     private Progetto progetto3;
     private Utente utente1;
-    private Utente utente2;
     private Utente utente3;
 
     @BeforeEach
@@ -33,7 +32,6 @@ class AziendaTest {
         azienda.aggiungiProgetto(progetto3);
 
         utente1 = new Utente("Mario", "Rossi", 1);
-        utente2 = new Utente("Gianni", "Agnelli", 2);
         utente3 = new Utente("Marco", "Verdi", 3);
 
         azienda.assegnaUtenteAProgetto(progetto1, utente1);

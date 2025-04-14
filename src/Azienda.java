@@ -25,6 +25,14 @@ public class Azienda {
         }
     }
 
+    public Integer getNumeroProgetti() {
+        return progetti.size();
+    }
+
+    public List<Progetto> getProgetti() {
+        return progetti;
+    }
+
     public Double calcoloBudget() {
         Double budgetTotale = 0.0;
         for (Progetto progetto : progetti) {
